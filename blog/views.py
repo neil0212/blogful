@@ -32,11 +32,10 @@ def entries(page=1):
     )
     
 
-'''@app.route("/entry/<int:page>")
-def eachentry(page):
-   entry = Entry.query.filter_by(id=page).first
-   return render_template('eachentry.html', entry=entry)'''
-
+@app.route("/entry/<int:id>")
+def id_entry_get(id):
+    entry = session.query(Entry).get(id)
+    return render_template("eachentry.html", entry=entry)
 
 
     
