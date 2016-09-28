@@ -1,5 +1,5 @@
 from flask import render_template
-
+from flask_sqlalchemy import SQLAlchemy
 from . import app
 from .database import session, Entry
 
@@ -8,7 +8,6 @@ PAGINATE_BY = 10
 @app.route("/")
 @app.route("/page/<int:page>")
 def entries(page=1):
-    # Zero-indexed page
     page_index = page - 1
 
     count = session.query(Entry).count()
@@ -32,6 +31,15 @@ def entries(page=1):
         total_pages=total_pages
     )
     
+
+'''@app.route("/entry/<int:page>")
+def eachentry(page):
+   entry = Entry.query.filter_by(id=page).first
+   return render_template('eachentry.html', entry=entry)'''
+
+
+
+    
 @app.route("/entry/add", methods=["GET"])
 def add_entry_get():
     return render_template("add_entry.html")
@@ -47,3 +55,5 @@ def add_entry_post():
     session.add(entry)
     session.commit()
     return redirect(url_for("entries"))
+    
+    
