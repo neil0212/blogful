@@ -70,3 +70,16 @@ def edit_entry_post(id):
     entry.cotent=request.form["content"]
     session.commit()
     return redirect(url_for("entries"))
+    
+    
+@app.route("/entry/<int:id>/delete", methods=["GET"])
+def delete_id_entry_get(id):
+    entry = session.query(Entry).get(id)
+    return render_template("delete_entry.html", entry=entry)
+    
+@app.route("/entry/<int:id>/edit", methods=["POST"])
+def delete_entry_post(id):
+    entry = session.query(Entry).get(id)
+    session.delete(entry)
+    session.commit()
+    return redirect(url_for("entries"))
