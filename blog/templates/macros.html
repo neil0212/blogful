@@ -10,7 +10,11 @@
     <div class="col-md-10">
         <h1> 
             
-             <h1><a href="{{ url_for('eachentry', id=entry.id) }}">{{ entry.title }}</a></h1>
+             <h1><a href="#">{{ entry.title }}</a></h1>   
+             <nav>
+                <a href="#">Edit</a> |
+                <a href="#">Delete</a> |
+             </nav>
             
         </h1>
         {{ entry.content | markdown }}
@@ -18,3 +22,4 @@
     </div>
 </div>
 {% endmacro %}
+

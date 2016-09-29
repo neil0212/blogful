@@ -56,3 +56,17 @@ def add_entry_post():
     return redirect(url_for("entries"))
     
     
+    
+@app.route("/entry/<int:id>/edit", methods=["GET"])
+def edit_id_entry_get(id):
+    entry = session.query(Entry).get(id)
+    return render_template("edit_entry.html", entry=entry)
+    
+    
+@app.route("/entry/<int:id>/edit", methods=["POST"])
+def edit_entry_post(id):
+    entry = session.query(Entry).get(id)
+    entry.title=request.form["title"]
+    entry.cotent=request.form["content"]
+    session.commit()
+    return redirect(url_for("entries"))
