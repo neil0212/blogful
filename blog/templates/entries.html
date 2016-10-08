@@ -13,6 +13,11 @@
     <a href="{{ url_for('entries', page=page + 1) }}">&larr; Older</a>
     </li>
     {% endif %}
+    <select>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+    </select>
     {% if has_prev %}
     <li class="next">
     <a href="{{ url_for('entries', page=page - 1) }}">&rarr; Newer</a>
