@@ -38,15 +38,17 @@ def id_entry_get(id):
     entry = session.query(Entry).get(id)
     return render_template("eachentry.html", entry=entry)
 
-
+from flask.ext.login import login_required
     
 @app.route("/entry/add", methods=["GET"])
+@login_required
 def add_entry_get():
     return render_template("add_entry.html")
 
 from flask import request, redirect, url_for
 
 @app.route("/entry/add", methods=["POST"])
+@login_required
 def add_entry_post():
     entry = Entry(
         title=request.form["title"],
