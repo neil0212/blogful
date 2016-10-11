@@ -2,6 +2,7 @@ from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
 from . import app
 from .database import session, Entry
+from flask.ext.login import current_user
 
 PAGINATE_BY = 10
 
@@ -53,6 +54,7 @@ def add_entry_post():
     entry = Entry(
         title=request.form["title"],
         content=request.form["content"],
+        author=current_user
     )
     session.add(entry)
     session.commit()
