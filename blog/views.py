@@ -2,7 +2,7 @@ from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
 from . import app
 from .database import session, Entry
-from flask.ext.login import current_user
+from flask_login import current_user
 
 PAGINATE_BY = 10
 
@@ -39,7 +39,7 @@ def id_entry_get(id):
     entry = session.query(Entry).get(id)
     return render_template("eachentry.html", entry=entry)
 
-from flask.ext.login import login_required
+from flask_login import login_required
     
 @app.route("/entry/add", methods=["GET"])
 @login_required
@@ -63,12 +63,14 @@ def add_entry_post():
     
 
 @app.route("/entry/<int:id>/edit", methods=["GET"])
+@login_required
 def edit_id_entry_get(id):
     entry = session.query(Entry).get(id)
     return render_template("edit_entry.html", entry_title=entry.title, entry_content=entry.content)
     
     
 @app.route("/entry/<int:id>/edit", methods=["POST"])
+@login_required
 def edit_entry_post(id):
     entry = session.query(Entry).get(id)
     entry.title=request.form["title"]
@@ -78,11 +80,13 @@ def edit_entry_post(id):
     
     
 @app.route("/entry/<int:id>/delete", methods=["GET"])
+@login_required
 def delete_id_entry_get(id):
     entry = session.query(Entry).get(id)
     return render_template("delete_entry.html", entry_title=entry.title, entry_content=entry.content)
     
 @app.route("/entry/<int:id>/delete", methods=["POST"])
+@login_required
 def delete_entry_post(id):
     entry = session.query(Entry).get(id)
     session.delete(entry)

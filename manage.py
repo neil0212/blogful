@@ -52,7 +52,7 @@ def adduser():
     session.commit()
 
 
-from flask.ext.migrate import Migrate, MigrateCommand
+from flask_migrate import Migrate, MigrateCommand
 from blog.database import Base
 
 class DB(object):
